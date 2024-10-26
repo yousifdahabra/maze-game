@@ -9,13 +9,12 @@ const divs = document.querySelectorAll(".boundary");
 
 btn.innerHTML = 'Start'
 btn.style.textAlign  = "center";
+
 btn.addEventListener("click", (event) => {
     start_game = true;
     finish_game = false
     msg.innerHTML = 'Now you can play'
-
 })
-
 
 divs.forEach((div) => {
     div.addEventListener("mouseover", (event) => {
@@ -24,15 +23,12 @@ divs.forEach((div) => {
             divs.forEach((div) => {
                 div.style.backgroundColor = "red";
             });
-            msg.innerHTML = 'You hit the wall go back to S and try again'
-
+            msg.innerHTML = 'You hit the wall Go back to S and try again'
         }else if(finish_game){
-            msg.innerHTML = 'You already finish the game to try again, click start or hover S to play'
-            console.log('you already finish the game')
+            msg.innerHTML = 'You already finished the game to try again, click start or hover S to play'
         }
         else{
-            msg.innerHTML = 'To play Game click start or hover S'
-            console.log('must click start or hover S to play')
+            msg.innerHTML = 'To play the Game click start or over S'
         }
     });
 });
@@ -51,24 +47,20 @@ start.addEventListener("mouseover", (event) => {
         });
         msg.innerHTML = 'Now you can play'
     }else if(finish_game){
-        msg.innerHTML = 'You already finish the game to try again, click start or hover S to play'
-        console.log('you already finish the game')
+        msg.innerHTML = 'You already finished the game to try again, click start or hover S to play'
     }else{
-        msg.innerHTML = 'To play Game click start or hover S'
-        console.log('must click start to play')
+        msg.innerHTML = 'To play the Game click start or over S'
     }
 });
+
 end.addEventListener("mouseover", (event) => {
     if(start_game && !hit_div){
         msg.innerHTML = 'You Win'
         finish_game = true;
         console.log('win')
     }else if(!start_game){
-        msg.innerHTML = 'To play Game click start or hover S'
-        console.log('must click start to play')
+        msg.innerHTML = 'To play the Game click start or over S'
     }else{
-        msg.innerHTML = 'go back to S and try again'
-
-        console.log('hover to S and try again')
+        msg.innerHTML = 'Go back to S and try again'
     }
 });
