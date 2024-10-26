@@ -1,6 +1,7 @@
 var btn = document.querySelector(".example");
 var start = document.getElementById("start");
 var end = document.getElementById("end");
+var msg = document.getElementById("status");
 var start_game = false;
 var hit_div = false;
 var finish_game = false;
@@ -10,45 +11,64 @@ btn.innerHTML = 'Start'
 btn.style.textAlign  = "center";
 btn.addEventListener("click", (event) => {
     start_game = true;
+    finish_game = false
+    msg.innerHTML = 'Now you can play'
+
 })
 
 
 divs.forEach((div) => {
     div.addEventListener("mouseover", (event) => {
         if(start_game && !finish_game){
-            console.log('lose')
             hit_div = true;
             divs.forEach((div) => {
                 div.style.backgroundColor = "red";
             });
+            msg.innerHTML = 'You hit the wall go back to S and try again'
+
         }else if(finish_game){
+            msg.innerHTML = 'You already finish the game to try again, click start or hover S to play'
             console.log('you already finish the game')
         }
         else{
-            console.log('must click start to play')
+            msg.innerHTML = 'To play Game click start or hover S'
+            console.log('must click start or hover S to play')
         }
     });
 });
 
 start.addEventListener("mouseover", (event) => {
+    if(!start_game){
+        if(finish_game)
+            finish_game = false
+        start_game = true
+        msg.innerHTML = 'Now you can play'
+    }
     if(start_game && !finish_game){
         hit_div = false
         divs.forEach((div) => {
             div.style.backgroundColor = "#eeeeee";
         });
+        msg.innerHTML = 'Now you can play'
     }else if(finish_game){
+        msg.innerHTML = 'You already finish the game to try again, click start or hover S to play'
         console.log('you already finish the game')
     }else{
+        msg.innerHTML = 'To play Game click start or hover S'
         console.log('must click start to play')
     }
 });
 end.addEventListener("mouseover", (event) => {
     if(start_game && !hit_div){
+        msg.innerHTML = 'You Win'
         finish_game = true;
         console.log('win')
     }else if(!start_game){
+        msg.innerHTML = 'To play Game click start or hover S'
         console.log('must click start to play')
     }else{
+        msg.innerHTML = 'go back to S and try again'
+
         console.log('hover to S and try again')
     }
 });
