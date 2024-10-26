@@ -3,6 +3,7 @@ var start = document.getElementById("start");
 var end = document.getElementById("end");
 var start_game = false;
 var hit_div = false;
+var finish_game = false;
 const divs = document.querySelectorAll(".boundary");
 
 btn.innerHTML = 'Start'
@@ -14,34 +15,40 @@ btn.addEventListener("click", (event) => {
 
 divs.forEach((div) => {
     div.addEventListener("mouseover", (event) => {
-        if(start_game){
+        if(start_game && !finish_game){
             console.log('lose')
             hit_div = true;
-            
-        }else{
-            console.log('must click start to play')
-
+            divs.forEach((div) => {
+                div.style.backgroundColor = "red";
+            });
+        }else if(finish_game){
+            console.log('you already finish the game')
         }
-
+        else{
+            console.log('must click start to play')
+        }
     });
-    if(!start_game){
-        div.style.backgroundColor = "red";
-    }
-  });
+});
+
 start.addEventListener("mouseover", (event) => {
-    if(start_game){
+    if(start_game && !finish_game){
         hit_div = false
-        divs.style.backgroundColor = "#eeeeee";
+        divs.forEach((div) => {
+            div.style.backgroundColor = "#eeeeee";
+        });
+    }else if(finish_game){
+        console.log('you already finish the game')
     }else{
         console.log('must click start to play')
     }
 });
 end.addEventListener("mouseover", (event) => {
-    if(start_game){
-        console.log('lose')
-        hit_div = true;
-    }else{
+    if(start_game && !hit_div){
+        finish_game = true;
+        console.log('win')
+    }else if(!start_game){
         console.log('must click start to play')
-
+    }else{
+        console.log('hover to S and try again')
     }
 });
